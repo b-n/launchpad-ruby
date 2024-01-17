@@ -1,0 +1,7 @@
+module Snake
+  class Main
+    def initilize: (String) -> void
+
+    def hello: (String) -> String
+  end
+end

@@ -1,9 +1,11 @@
-#!/usr/bin/env ruby
-
 require './display'
 require './snake'
 require 'midi-eye'
 require 'concurrent'
+
+require 'snake/snake'
+
+hi = Snake::Main.new
 
 @midi_input = UniMIDI::Input.use(1)
 @midi_output = UniMIDI::Output.use(1)
@@ -32,6 +34,10 @@ MIDIEye::Listener.new(@midi_input).tap do |listener|
         game<<10
       when 79
         game>>10
+      when 69
+        game.toggle_pause
+      when 59
+        display.reset(0)
       end
       next
     end

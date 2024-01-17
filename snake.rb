@@ -1,3 +1,4 @@
+
 class Snake
 
   module Direction
@@ -11,11 +12,12 @@ class Snake
     @display = display
 
     @time_between_ticks = 250.0
-    @body = [[4,4], [4,4], [4,4]]
-    20.times { @body.push [4,4] }
+    @body = [[4,4]]
+    3.times { @body.push @body[0] }
 
     @dir = Direction::NORTH
     @ticks = 0
+    @paused = false
   end
 
   def >>(speed)
@@ -44,9 +46,14 @@ class Snake
     @dir = direction
   end
 
+  def toggle_pause
+    @paused = !@paused
+  end
+
   private
 
   def tick
+    return if @paused
     removed = move_snake
     send_to_display([removed])
     @ticks += 1
